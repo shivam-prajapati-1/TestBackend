@@ -24,6 +24,9 @@ app.use(cors());
 // Mount routers
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
+app.get('/', (req, res) => {
+  res.send('API Running...');
+});
 
 // Central error handler
 app.use((err, req, res, next) => {
