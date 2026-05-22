@@ -14,17 +14,18 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors({
-  origin: 'https://testfrontendshivam.netlify.app',
-  credentials: true
-}));
+
+app.use(cors());
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 
+
 app.get('/', (req, res) => {
   res.send('API Running...');
 });
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
