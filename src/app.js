@@ -3,34 +3,39 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
-// Route files
+
 const authRoutes = require('./routes/authRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 
-// Load env vars
+
 dotenv.config();
 
-// Connect to database
+
 connectDB();
 
 const app = express();
 
-// Body parser
+
 app.use(express.json());
 
-// Enable CORS
-app.use(cors());
 
-// Mount routers
+app.use(cors({
+  origin: 'https://frontendtest6.netlify.app',
+  credentials: true
+}));
+
+
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
+
 app.get('/', (req, res) => {
   res.send('API Running...');
 });
 
-// Central error handler
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
+
   res.status(err.statusCode || 500).json({
     success: false,
     error: err.message || 'Server Error'
