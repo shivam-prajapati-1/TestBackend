@@ -3,27 +3,21 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
-
 const authRoutes = require('./routes/authRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 
-
 dotenv.config();
-
 
 connectDB();
 
 const app = express();
 
-
 app.use(express.json());
 
-
 app.use(cors({
-  origin: 'https://frontendtest6.netlify.app',
+  origin: 'https://testfrontendshivam.netlify.app',
   credentials: true
 }));
-
 
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
@@ -31,7 +25,6 @@ app.use('/api/projects', projectRoutes);
 app.get('/', (req, res) => {
   res.send('API Running...');
 });
-
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
